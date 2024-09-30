@@ -30,6 +30,7 @@ jobs:
     - name: Run Tests
       env:
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        ALLOWED_HOSTS_IN_DEV: ${{ secrets.ALLOWED_HOSTS_IN_DEV }}
       run: |
         cd src
         python manage.py test
@@ -37,6 +38,7 @@ jobs:
     - name: Run App Test
       env:
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        ALLOWED_HOSTS_IN_DEV: ${{ secrets.ALLOWED_HOSTS_IN_DEV }}
       run: |
         cd src
         python manage.py whats_this
