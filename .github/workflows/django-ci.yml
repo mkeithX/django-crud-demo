@@ -27,7 +27,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Run Tests
+    - name: Run Tests and App
       env:
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
         ALLOWED_HOSTS_IN_DEV: ${{ secrets.ALLOWED_HOSTS_IN_DEV }}
@@ -40,17 +40,4 @@ jobs:
       run: |
         cd src
         python manage.py test
-
-    - name: Run App Test
-      env:
-        SECRET_KEY: ${{ secrets.SECRET_KEY }}
-        ALLOWED_HOSTS_IN_DEV: ${{ secrets.ALLOWED_HOSTS_IN_DEV }}
-        STATICFILES_DIRS: ${{ secrets.STATICFILES_DIRS }}
-        DB_NAME: ${{ secrets.DB_NAME }}
-        DB_HOST: ${{ secrets.DB_HOST }}
-        DB_PORT: ${{ secrets.DB_PORT }}
-        DB_USER: ${{ secrets.DB_USER }}
-        DB_PASS: ${{ secrets.DB_PASS }}
-      run: |
-        cd src
         python manage.py whats_this
