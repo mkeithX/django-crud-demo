@@ -1,0 +1,45 @@
+{% extends 'layouts/base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% block title %}login{% endblock title %}
+{% block content %}
+<!--  -->
+
+<div class="modal modal-sheet position-static d-block p-4 py-md-5" tabindex="-1" role="dialog" id="modalSignin">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content rounded-4 shadow">
+      <div class="modal-header p-5 pb-4 border-bottom-0">
+        <h1 class="fw-regular mb-0 fs-2">Login</h1>
+
+      </div>
+
+      <div class="modal-body p-5 pt-0">
+        <form class="" method="POST">
+          <div class="form-floating mb-3">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+          </div>
+          <button class="w-100 mb-3 btn btn-md rounded-3 btn-primary rounded-pill" type="submit">Login</button>
+          <small class="text-body-secondary text-center">
+            <a href="{% url 'signup' %}" class="text-decoration-none">
+              <button class="w-100 btn btn-md btn-success rounded-pill" type="button">Signup</button></a>
+          </small>
+          <hr class="my-4">
+
+          <div class="my-0 text-center">
+            <small class="text-body-secondary">
+              <a href="{% url 'password-reset' %}" class="text-decoration-none">Forget password?</a>
+            </small>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->
+
+{% endblock content %}

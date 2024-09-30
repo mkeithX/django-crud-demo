@@ -1,0 +1,42 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% block title %}Search{% endblock title %}
+{% block content %}
+<div class="container">
+    <div class="mb-3">
+        <a href="{% url 'all-users' %}" class="page-link">
+            <button class="btn btn-sm btn-primary rounded-pill">
+                Go back
+            </button>
+        </a>
+    </div>
+    <div class="row px-1 py-1 justify-content-center">
+        <div>
+            <h4 class="mb-3">
+                Search results for <span class="text-primary">'{{ request.GET.q }}'</span>.
+            </h4>
+        </div>
+        {% for user in search_result %}
+
+        <div class="d-flex text-body-secondary pt-3">
+            <img src="{{user.user_profile.avatar.url}}" alt="" class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="40" height="40">
+            <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+              <div class="d-flex justify-content-between">
+                <strong class="text">{{user.first_name}} {{user.last_name}}</strong>
+                <a href="{% url 'profile-detail-view' user.id %}" class="text-decoration-none">View</a>
+              </div>
+              <span class="d-block">@{{user.username}}</span>
+            </div>
+          </div>
+
+        {% empty %}
+        <p class="mb-3">No match found. Try different keyword.</p>
+        {% endfor %}
+    </div>
+</div>
+{% include 'layouts/pagination.html' %}
+{% endblock content %}
+

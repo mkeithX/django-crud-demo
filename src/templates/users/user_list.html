@@ -1,0 +1,59 @@
+{% extends 'layouts/base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% block title %} recents{% endblock title %}
+{% block content %}
+{% if user.is_authenticated %}
+<!--  -->
+<div class="container d-flex align-items-center mb-3">
+  <form class="w-100" role="search" action="{% url 'search' %}">
+    <input type="search" id="search" name="q" class="form-control" autocomplete="off"
+      placeholder="Search" aria-label="Search">
+  </form>
+</div>
+<!--  -->
+<div class="container">
+  <div class="row px-1 py-3 justify-content-center">
+    <div class="my-3 p-3 bg-body-tertiary rounded-3 shadow-sm">
+      <h6 class="border-bottom pb-2 mb-0 mt-3">
+        Recents
+      </h6>
+      {% for profile in object_list %}
+      <div class="d-flex text-body-secondary pt-3">
+        <img src="{{user.user_profile.avatar.url}}" alt="{{profile.user.username}}" class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="40"
+          height="40">
+        <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+          <div class="d-flex justify-content-between">
+            <strong class="text">{{profile.user.first_name}} {{profile.user.last_name}}</strong>
+            <a href="{{profile.get_absolute_url}}" class="text-decoration-none">
+              View
+            </a>
+          </div>
+          <span class="d-block">@{{profile.user.username}}</span>
+        </div>
+      </div>
+      {% endfor %}
+      <!-- pagination -->
+      <small class="d-block text-center mt-3">
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}" class="text-decoration-none">Back</a>
+        {% endif %}
+
+        <span class="current">
+          {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="text-decoration-none">Next</a>
+        {% endif %}
+      </small>
+
+      <!--  -->
+
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock content %}

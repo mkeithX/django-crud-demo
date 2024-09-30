@@ -1,0 +1,68 @@
+{% load static %}
+{% load humanize %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm border-bottom p-2 mb-2 fixed-top" data-bs-theme="auto">
+  <div class="container-lg">
+    <a class="navbar-brand" href="/"><span class="text-success">
+        django</span> | crud demo
+    </a>
+    <div>
+      {% block javascripts %}
+      <small>{% include 'layouts/toggle.html' %}</small>
+      {% endblock javascripts %}
+    </div>
+
+    {% if user.is_authenticated %}
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fa-solid fa-bars"></i></span></button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+        <li class="nav-item"><a class="nav-link" href="{% url 'all-users' %}">Recent</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            More
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Demo</a></li>
+            <li><a class="dropdown-item" href="https://github.com/mkeithX">GitHub</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="{{user.user_profile.avatar.url}}" alt="{{user.first_name}}" width="30" height="30"
+              class="object-fit-contain rounded-circle">
+
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
+            <li><a class="dropdown-item" href="{% url 'profile-detail-view' user.id %}">Profile</a></li>
+            <li><a class="dropdown-item" href="{% url 'update-profile' user.id %}">Settings</a></li>
+            <li><a class="dropdown-item" href="{% url 'password-change' %}">Change password</a></li>
+            <hr class="dropdown-divider">
+        </li>
+        <li>
+          <a class="dropdown-item" href="{% url 'logout' %}">
+            Logout
+          </a>
+        </li>
+
+        {% if user.is_superuser %}
+        <hr>
+        <li>
+          <a class="dropdown-item" href="/admin/" target="_blank">
+            <small>Admin <i class="fa-solid fa-arrow-up-right-from-square"></i></small>
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+      </li>
+      </ul>
+      {% endif %}
+    </div>
+  </div>
+</nav>

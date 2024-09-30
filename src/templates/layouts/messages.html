@@ -1,0 +1,9 @@
+{% load static %}
+{% load django_bootstrap5 %}
+<div class="container-lg px-1 text-center">
+  {% if messages %}
+  {% for message in messages %}
+<p>{% bootstrap_messages %}</p>
+  {% endfor %}
+  {% endif %}
+</div>

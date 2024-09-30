@@ -1,0 +1,41 @@
+{% extends 'layouts/base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% load users_extras %}
+{% block title %}home{% endblock title %}
+{% block content %}
+<!-- break -->
+<div class="row mt-5">
+  <div class="col">
+
+    <div class="px-4 py-5 my-5 text-center">
+      <h1 class="display-5 text-body-emphasis">
+        {{ current_time|time_based_greeting }}, 
+        {% if not user.first_name %}
+        @{{user.username|safe}}.
+        {% else %}
+        {{user.first_name|safe}}. <!-- {{user.first_name|slice:":8"}}.  -->
+        {% endif %}
+      </h1>
+      <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">
+          {% if not user.user_profile.bio %}
+          Just a few more clicks to complete your profile for life-changing experience.
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <a href="{% url 'update-profile' user.id %}">
+            <button type="button" class="btn btn-sm btn-primary rounded-pill px-3 gap-3">Take me there <i
+                class="fa-solid fa-arrow-up-right-from-square"></i></button>
+          </a>
+          {% else %}
+          How are you doin'?
+          {% endif %}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  -->
+  <!--  -->
+  {% endblock content %}

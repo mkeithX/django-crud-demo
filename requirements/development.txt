@@ -1,0 +1,12 @@
+Django
+boto3
+django-bootstrap5
+django-ckeditor
+django-cleanup
+django-crispy-forms
+django-environ
+Pillow
+psycopg2
+python-dotenv
+whitenoise
+django-countries

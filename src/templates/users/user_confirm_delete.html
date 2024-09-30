@@ -1,0 +1,33 @@
+{% extends 'layouts/base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% block title %}delete-account{% endblock title %}
+{% block content %}
+
+{% if user.is_authenticated %}
+<!--  -->
+
+<!--  -->
+
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h2 class="text-warning">WARNING <i class="fa-solid fa-triangle-exclamation"></i></h2>
+    <p>By clicking Confirm, you understand the <strong class="text-danger">consequences</strong> and agree that:</p>
+    <ul>
+      <li>This <strong class="text-danger">CANNOT</strong> be undone;</li>
+      <li>Your account will be deleted <strong class="text-danger">PERMANENTLY</strong>; and</li>
+      <li>By all means, recovering your deleted account is <strong class="text-danger">NOT</strong> possible.</li>
+    </ul>
+
+<br>
+    {% bootstrap_button "Confirm" button_type="submit" button_class="btn btn-sm btn-danger rounded-pill px-3" %}
+    <a href="{% url 'profile-detail-view' user.id %}" class="btn btn-sm btn-warning rounded-pill px-3" tabindex="-1"
+        role="button">
+        Cancel
+    </a>
+</form>
+{% endif %}
+
+{% endblock content %}

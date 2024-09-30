@@ -1,0 +1,31 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load django_bootstrap5 %}
+{% load humanize %}
+{% block title %}signup{% endblock title %}
+{% block content %}
+
+<div class="container w-100 col-xl-10 col-xxl-8 px-4 py-1">
+  <div class="row align-items-center g-lg-5 py-5">
+    <div class="col-md-10 mx-auto col-lg-5">
+
+      <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary" method="POST" enctype="multipart/form-data">
+
+        <div class="form-floating mb-3">
+          {% csrf_token %}
+          {% bootstrap_form form show_label=False %}
+
+          <button class="w-100 btn btn-md btn-success rounded-pill" type="submit">Signup</button>
+          <div class="my-2"></div>
+          <small class="text-body-secondary">By clicking Sign up, you agree to the terms of use.</small>
+          <hr class="my-4">
+          <small class="text-body-secondary">
+            Aleady registered? <a href="{% url 'login' %}" class="text-decoration-none">Login</a> instead.
+          </small>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
