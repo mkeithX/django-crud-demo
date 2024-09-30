@@ -6,4 +6,4 @@ updates:
       interval: "daily"
     open-pull-requests-limit: 99
     labels:
-      - 'pr: dependencies'
+      - 'dependencies'
