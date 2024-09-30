@@ -3,6 +3,8 @@ import os
 import environ
 from django.contrib.messages import constants as messages
 
+
+
 env = environ.Env(
     DEBUG=(bool, False),
     DB_ENGINE=(str, "django.db.backends.postgresql"),
@@ -13,6 +15,7 @@ env = environ.Env(
 
 CORE_DIR = Path(__file__).resolve().parent.parent.parent
 BASE_DIR = environ.Path(__file__) -4
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
