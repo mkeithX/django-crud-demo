@@ -7,117 +7,136 @@
 {% block title %}@{{user_profile.user.username}}{% endblock title %}
 {% block content %}
 <div class="container mt-3 py-3 px-3">
-    <div class="row gx-0">
-      <div class="col-lg-3">
-        <div class="d-flex align-items-center mt-3 mb-3">
-        <img src="{{user.user_profile.avatar.url}}" class="bd-placeholder-img rounded-circle" alt="{{profile.user.username}}" width="200" height="200">
+  <div class="row gx-0">
+    <div class="col-lg-3">
+      <div class="d-flex align-items-center mt-3 mb-3">
+        <img src="{{user.user_profile.avatar.url}}" class="bd-placeholder-img rounded-circle"
+          alt="{{profile.user.username}}" width="200" height="200">
       </div>
-      </div>
-      <div class="col-lg-8">
+    </div>
+    <div class="col-lg-8">
+      <div>
+
+        <h3 class="card-title">
+          {{user_profile.user.first_name}} {{user_profile.user.last_name}}
+        </h3>
+        <h5 class="card-body mb-3">
+          <small class="text-opacity-75">
+            <span class="badge rounded-pill text-bg-info">@{{user_profile.user.username}}</span>
+
+            {% if not user_profile.bio %}
+            <i class="fa-regular fa-circle-xmark" style="color: #cb2a80;"></i> Unverified
+            {% else %}
+            <i class="fa-solid fa-circle-check" style="color: #2a6aff;"></i>
+            {% endif %}
+            {% if user_profile.user.is_online %}
+            <i class="fa-regular fa-circle" style="color: #04f66c;"></i>
+            {% else %}
+            <i class="fa-regular fa-circle"></i>
+            {% endif %}
+          </small>
+        </h5>
         <div>
+        </div>
+        <!--  -->
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
+              type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">About</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
+              type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Bio</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane"
+              type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Contact</button>
+          </li>
+          {% if object.user.user_profile %}
 
-          <h3 class="card-title">
-            {{user_profile.user.first_name}} {{user_profile.user.last_name}}  
-          </h3>
-          <h5 class="card-body mb-3">
-            <small class="text-opacity-75">
-              <span class="badge rounded-pill text-bg-info">@{{user_profile.user.username}}</span>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="private-tab" data-bs-toggle="tab" data-bs-target="#private-tab-pane"
+              type="button" role="tab" aria-controls="private-tab-pane" aria-selected="false">
+              <span class="text-body-emphasis text-opacity-50">Private</span>
+            </button>
+          </li>
+          {% endif %}
 
-              {% if not user_profile.bio %}
-              <i class="fa-regular fa-circle-xmark" style="color: #cb2a80;"></i> Unverified
+
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
+            tabindex="0">
+            <p class="text-opacity-50">
+              Fullname : {{user_profile.user.first_name}} {{user_profile.user.last_name}}<br>
+              Birthday <i class="fa-solid fa-cake-candles"></i> : {{user_profile.user.date_of_birth}} •
+              {{user_profile.user.age}} <br>
+              Email <i class="fa-regular fa-envelope"></i> : {{user_profile.user.email|mask_email}}<br>
+              Country <i class="fa-solid fa-earth-asia"></i> : {{user_profile.country}} <i
+                class="{{ user_profile.country.flag_css }}"></i><br>
+              Gender <i class="fa-solid fa-venus-mars"></i> : {{user_profile.user.gender|safe|capfirst}}<br>
+              Member Since:               {% if user_profile.user.is_superuser %}
+              DAY ONE.
               {% else %}
-              <i class="fa-solid fa-circle-check" style="color: #2a6aff;"></i>
-              {% endif %}
-              {% if user_profile.user.is_online %}
-              <i class="fa-regular fa-circle" style="color: #04f66c;"></i>
+              {{user.date_joined|naturalday|capfirst}}.
+              {% endif %}<br>
+              Last seen :
+              {% if not user_profile.user.last_login %}
+              Never
               {% else %}
-              <i class="fa-regular fa-circle"></i>              
+              {{user_profile.user.last_login|time_ago}}
               {% endif %}
-            </small>
-          </h5>
-          <div>
+            </p>
+
           </div>
+          <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+            <p class="card-text mb-3">
+              {{user_profile.bio|safe|default:"lorem"}}
+            </p>
+          </div>
+          <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
+            <p>
+              Member since
+              {% if user_profile.user.is_superuser %}
+              DAY ONE.
+              {% else %}
+              {{user.date_joined|naturalday|capfirst}}.
+              {% endif %}
+              <br>
+              Updated : {{user_profile.date_updated|naturalday|capfirst}}<br>
+              Last seen :
+              {% if not user_profile.user.last_login %}
+              Never
+              {% else %}
+              {{user_profile.user.last_login|time_ago}}
+              {% endif %}
+              <br>
+              {% if user_profile.user.is_online %}
+              <i class="fa-regular fa-circle" style="color: #04f66c;"></i> (Online)
+              {% else %}
+              <i class="fa-regular fa-circle"></i> (Offline)
+              {% endif %}
+              <br>
+            </p>
+          </div>
+          <!-- Private -->
+          {% if user.id %}
+          <div class="tab-pane fade" id="private-tab-pane" role="tabpanel" aria-labelledby="private-tab" tabindex="0">
+            <div>
+              <p class="text-danger">
+                <i class="fa-solid fa-triangle-exclamation"></i> This tab should NOT be accessible by other users. <br>
+              </p>
+            </div>
+
+            <p class="text-opacity-50">
+              UID <i class="fa-regular fa-id-badge"></i> : <code>{{user_profile.user.id|safe}}</code> <br>
+              Username <i class="fa-regular fa-user"></i> : @{{user_profile.user.username}} <br>
+              Email <i class="fa-regular fa-envelope"></i> : {{user_profile.user.email}}<br>
+            </p>
+
+          </div>
+          {% endif %}
           <!--  -->
-          <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-              <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Home</button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Bio</button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Contact</button>
-            </li>
-            {% if object.user.user_profile %}
-
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="private-tab" data-bs-toggle="tab" data-bs-target="#private-tab-pane" type="button" role="tab" aria-controls="private-tab-pane" aria-selected="false">
-                <span class="text-body-emphasis text-opacity-50">Private</span>
-              </button>
-            </li>
-            {% endif %}
-
-
-          </ul>
-          <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-              <p class="text-opacity-50">
-                 Fullname : {{user_profile.user.first_name}} {{user_profile.user.last_name}}<br>
-                 Birthday <i class="fa-solid fa-cake-candles"></i> : {{user_profile.user.date_of_birth}} ~ {{user_profile.user.age}} <br>
-                 Email <i class="fa-regular fa-envelope"></i> : {{user_profile.user.email|mask_email}}<br>
-                 Country <i class="fa-solid fa-earth-asia"></i> : {{user_profile.country}} <i class="{{ user_profile.country.flag_css }}"></i><br>
-                 Gender <i class="fa-solid fa-venus-mars"></i> : {{user_profile.user.gender|safe|capfirst}}
-               </p>
-
-            </div>
-            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-              <p class="card-text mb-3">
-                {{user_profile.bio|safe|default:"lorem"}}
-              </p>
-            </div>
-            <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
-              <p>
-                Member since 
-                {% if user_profile.user.is_superuser %}
-                DAY ONE.
-                {% else %}
-                {{user.date_joined|naturalday|capfirst}}.
-                {% endif %}
-                <br>
-                Updated : {{user_profile.date_updated|naturalday|capfirst}}<br>
-                Last seen : 
-                {% if not user_profile.user.last_login %}
-                Never
-                {% else %}
-                {{user_profile.user.last_login|time_ago}} 
-                {% endif %}
-                <br>
-                {% if user_profile.user.is_online %}
-                <i class="fa-regular fa-circle" style="color: #04f66c;"></i> (Online)
-                {% else %}
-                <i class="fa-regular fa-circle"></i> (Offline)                
-                {% endif %}
-                <br>
-              </p>
-            </div>
-            <!-- Private -->
-            {% if user.id %}
-            <div class="tab-pane fade" id="private-tab-pane" role="tabpanel" aria-labelledby="private-tab" tabindex="0">
-              <div>
-                <p class="text-danger">
-                  <i class="fa-solid fa-triangle-exclamation"></i> This tab should NOT be accessible by other users. <br>
-                </p>
-              </div>
-
-              <p class="text-opacity-50">
-                UID <i class="fa-regular fa-id-badge"></i> : <code>{{user_profile.user.id|safe}}</code> <br>
-                Username <i class="fa-regular fa-user"></i> : @{{user_profile.user.username}} <br>
-                Email <i class="fa-regular fa-envelope"></i> : {{user_profile.user.email}}<br>
-               </p>
-
-            </div>
-            {% endif %}
-<!--  -->
         </div>
       </div>
     </div>
