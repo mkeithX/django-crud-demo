@@ -1,19 +1,102 @@
 # Django CRUD `demo`
 
-This project demonstrates a simple Django-based CRUD (Create, Read, Update, Delete) application. It features a custom user model, uses PostgreSQL as the database, and employs Bootstrap for front-end styling.
+The project demonstrates a simple **CRUD** application built with Django.
+
 
 ## Features
 
-- Custom User Model
-- CRUD operations for managing resources
-- PostgreSQL as the database backend
-- Bootstrap for a responsive UI
-- Django’s built-in authentication system
+- **Custom User Model** 
+> Extend the default user model using `AbstractUser` to add fields like bio or profile picture while retaining authentication features.
 
-### Structure
+- **CRUD Operations**
+> Manage resources with full Create, Read, Update, and Delete functionality.
+
+- **PostgreSQL**
+> Use PostgreSQL as the database backend.
+
+- **Responsive UI**
+> Create a responsive user interface with Bootstrap CDI.
+
+## Installation
+It is recommended to have latest version of the following installed in your machine:
+
+- [Python](https://python.org/downloads)
+- [Django 5.1](https://docs.djangoproject.com/en/5.1/)
+- [PostgreSQL](https://www.postgresql.org/download/)
+- [Git](https://git-scm.com/downloads)
+- [pgAdmin](https://www.pgadmin.org/download/)
+
+## Local Installation
+
+### Clone the repository
+
+   ```bash
+   git clone https://github.com/mkeithX/django-crud-demo.git
+   ```
+   ```bash
+   cd django-crud-demo
+   ```
+
+### Create a virtual environment and install dependencies
+
+   ```bash
+   py -m venv .venv
+   ```
+   ```bash
+   py -m pip install --upgrade -r requirements.txt
+   ```
+### Configure environment variables in the `.env` 
+
+```bash
+cp .env.example .env
+```
 
 <pre>
-django-crud-demo
+SECRET_KEY=
+ALLOWED_HOSTS_IN_DEV=
+STATICFILES_DIRS=
+
+# Database Cofig
+DB_NAME=
+DB_HOST=
+DB_PORT=
+DB_USER=
+DB_PASS=
+DB_TEST=
+DB_SSL=
+</pre>
+
+### PostgreSQL database
+You can use the pgAdmin to setup database
+
+![pgAdmin](./screenshots/pgAdmin.png)
+
+
+### Run migrations to set up the database
+
+   ```bash
+   py manage.py migrate
+   ```
+
+### Create a superuser
+
+   ```bash
+   py manage.py createsuperuser
+   ```
+
+### Run the development server
+
+   ```bash
+   py manage.py runserver
+   ```
+
+Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in your web browser to view the application.
+
+
+## Structure
+
+<pre>
+django-crud-demo/
 │ 
 ├───.github
 │   └───workflows
@@ -30,9 +113,9 @@ django-crud-demo
 │   │       └───...
 │   ├───core
 │   │   ├───settings
-│   │   │   ├───base
-│   │   │   ├───development
-│   │   │   └───production
+│   │   │   ├───base.py
+│   │   │   ├───development.py
+│   │   │   └───production.py
 │   │   └───...
 │   ├───media
 │   ├───staticfiles
@@ -46,97 +129,36 @@ django-crud-demo
     └───css  
 </pre>
 
-### Requirements
 
-To run this project locally, you’ll need:
-
-- [Python 3.11](https://python.org/downloads)
-- [Django 5.1](https://docs.djangoproject.com/en/5.1/)
-- [PostgreSQL](https://www.postgresql.org/download/)
-
-## Installation
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/mkeithX/django-crud-demo.git
-   ```
-   ```bash
-   cd django-crud-demo
-   ```
-
-2. Create a virtual environment and activate it:
-
-   ```bash
-   python -m venv .venv
-   # For Linux/Mac
-   source .venv/bin/activate
-   # For Windows
-   venv\Scripts\activate
-   ```
-
-3. Install dependencies:
-
-   ```bash
-   py -m pip install -- upgrade -r requirements.txt
-   ```
-
-4. Set up the PostgreSQL database:
-   - Create a PostgreSQL database for the project.
-   - Update the `DATABASES` setting in `development.settings.py` with your PostgreSQL credentials:
-
-   ```python
-   DATABASES = {
-       'default': {
-           'ENGINE': 'django.db.backends.postgresql',
-           'NAME': 'your_database_name',
-           'USER': 'your_username',
-           'PASSWORD': 'your_password',
-           'HOST': 'localhost',
-           'PORT': '5432',
-       }
-   }
-   ```
-
-5. Run migrations to set up the database:
-
-   ```bash
-   python manage.py migrate
-   ```
-
-6. Create a superuser:
-
-   ```bash
-   python manage.py createsuperuser
-   ```
-
-7. Collect static files:
-
-   ```bash
-   python manage.py collectstatic
-   ```
-
-8. Run the development server:
-
-   ```bash
-   python manage.py runserver
-   ```
-
-Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in your web browser to view the application.
-
-
-## Custom User Model
+## IMPORTANT
 
 This project uses a custom user model defined in the accounts app. It’s important to configure the custom user model before running the initial migration. Ensure that the `AUTH_USER_MODEL` setting in `settings.py` is properly set:
 
 ```python
 AUTH_USER_MODEL = 'apps_users.User'
 ```
+## Tips
 
-## Bootstrap Integration
+Create 5 dummy users
 
-[Bootstrap](https://getbootstrap.com) is used for styling the frontend of the application. All templates are configured to include Bootstrap’s CSS and JavaScript files. You can find the templates in the `templates` directory and the static files (CSS/JS) in the `static` directory.
+```bash
+py manage.py create_users 5
+```
+Generate new SECRET_KEY
+
+```bash
+py manage.py new_secret
+```
+
+Run checks what changes would be made to the database for the apps_users app without applying them.
+
+```bash
+py manage.py makemigrations apps_users --dry-run --verbosity 3
+```
 
 ## License
 
-This project is licensed under the MIT License.
+See [License](./LICENSE).
+
+## More cool stuff
+More cool stuff in [**my website**](https://mkeithx.github.io).

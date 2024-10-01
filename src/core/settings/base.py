@@ -3,7 +3,7 @@ import os
 import environ
 from django.contrib.messages import constants as messages
 
-
+from email.utils import getaddresses
 
 env = environ.Env(
     DEBUG=(bool, False),
@@ -117,3 +117,8 @@ MEDIA_ROOT = os.path.join(CORE_DIR, "media")
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = env.list("STATICFILES_DIRS")
+
+AUTHENTICATION_BACKENDS = (
+    "apps.users.backends.EmailOrUsernameModelBackend",
+    "django.contrib.auth.backends.ModelBackend",
+)
