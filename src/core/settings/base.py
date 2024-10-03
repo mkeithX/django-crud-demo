@@ -122,3 +122,30 @@ AUTHENTICATION_BACKENDS = (
     "apps.users.backends.EmailOrUsernameModelBackend",
     "django.contrib.auth.backends.ModelBackend",
 )
+
+SHORT_DATE_FORMAT = "m/d/Y"
+SHORT_DATETIME_FORMAT = "m/d/Y P"
+
+# 11/08/2008
+DATE_INPUT_FORMATS = [
+    "%m/%d/%Y"
+]
+
+SHORT_DATE_FORMAT = "m/d/Y"
+SHORT_DATETIME_FORMAT = "m/d/Y P"
+
+# 11/08/2008
+DATE_INPUT_FORMATS = [
+    "%m/%d/%Y"
+]
+
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+]
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+SESSION_COOKIE_AGE = 10 * 30 # 5 Minutes
