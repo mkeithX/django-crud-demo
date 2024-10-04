@@ -11,7 +11,7 @@
     <div class="row gx-3">
         <div class="col-lg-3">
             <div class="d-flex align-items-center mt-3 mb-3">
-                <img src="{{user.user_profile.avatar.url}}" class="bd-placeholder-img rounded-circle" alt=""
+                <img src="{{user.user_profile.avatar.url}}" class="bd-placeholder-img rounded-circle" alt="avatar"
                     style="max-width: 200px;">
             </div>
         </div>
@@ -22,28 +22,28 @@
                         <p class="lead bg-success-subtle fw-normal p-2 mb-3 fs-3">
                             <span class="text-emphasis-dark">Update profile</span>
                         </p>
-                      </div>
+                    </div>
                 </header>
                 <figure class="mb-3">
                     <form action="" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         {% bootstrap_form u_form show_label=False %}
-                        
+
                         <div class="container px-1 mt-1">
-                            <p class="lead bg-dark-subtle fw-normal text-emphasis-dark p-2 mb-3 fs-5">
-                                <span class="invisible">xoxo</span> 
+                            <p class="lead bg-success-subtle fw-normal text-emphasis-dark p-2 mb-3 fs-5">
+                                <span class="invisible">xoxo</span>
                             </p>
-                          </div>
+                        </div>
 
                         {% bootstrap_form p_form show_label=False %}
                         <div class="d-grid gap-2 d-sm-flex">
                             {% bootstrap_button "Confirm" button_type="submit" button_class="btn btn-sm btn-primary rounded-pill px-3" %}
-                            <a href="{% url 'profile-detail-view' user.id %}" class="btn btn-sm btn-warning rounded-pill px-3" tabindex="-1"
-                                role="button">
+                            <a href="{% url 'profile-detail-view' user.id %}"
+                                class="btn btn-sm btn-warning rounded-pill px-3" tabindex="-1" role="button">
                                 Cancel
                             </a>
-                            <a href="{% url 'delete-account' user.pk %}" class="btn btn-sm btn-danger rounded-pill px-3" tabindex="-1"
-                                role="button">
+                            <a href="{% url 'delete-account' user.pk %}" class="btn btn-sm btn-danger rounded-pill px-3"
+                                tabindex="-1" role="button">
                                 Delete Account
                             </a>
                         </div>

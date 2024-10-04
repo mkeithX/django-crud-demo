@@ -75,7 +75,7 @@
               Country <i class="fa-solid fa-earth-asia"></i> : {{user_profile.country}} <i
                 class="{{ user_profile.country.flag_css }}"></i><br>
               Gender <i class="fa-solid fa-venus-mars"></i> : {{user_profile.user.gender|safe|capfirst}}<br>
-              Member Since:               {% if user_profile.user.is_superuser %}
+              Member Since: {% if user_profile.user.is_superuser %}
               DAY ONE.
               {% else %}
               {{user.date_joined|naturalday|capfirst}}.

@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="auto">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,11 +26,11 @@
 
     <!-- Local assets -->
     <link rel="icon" href="{% static 'favicon.ico' %}">
-    
+
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
 
 
-    <title>crud demo | {% block title %}{% endblock title %} </title>
+    <title>crud demo • {% block title %}{% endblock title %} </title>
 </head>
 
 <body class="d-flex flex-column w-100 h-100">
@@ -39,8 +40,8 @@
                 <div>
 
                     <small>{% include 'layouts/toggle.html' %}</small>
-        
-                  </div>
+
+                </div>
             </div>
         </nav>
 

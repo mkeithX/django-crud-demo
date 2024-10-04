@@ -29,6 +29,8 @@ clearsessions
 collectstatic
 findstatic
 runserver
+color_styles
 create_users
+delete_dummy
 new_secret
 whats_this
