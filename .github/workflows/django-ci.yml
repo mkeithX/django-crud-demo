@@ -27,11 +27,18 @@ jobs:
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
         ALLOWED_HOSTS_IN_DEV: ${{ secrets.ALLOWED_HOSTS_IN_DEV }}
         STATICFILES_DIRS: ${{ secrets.STATICFILES_DIRS }}
-        DB_NAME: ${{ secrets.DB_NAME}}
-        DB_HOST: ${{ secrets.DB_HOST}}
-        DB_PORT: ${{ secrets.DB_PORT}}
-        DB_USER: ${{ secrets.DB_USER}}
-        DB_PASS: ${{ secrets.DB_PASS}}
+        DB_NAME: ${{ secrets.DB_NAME }}
+        DB_HOST: ${{ secrets.DB_HOST }}
+        DB_PORT: ${{ secrets.DB_PORT }}
+        DB_USER: ${{ secrets.DB_USER }}
+        DB_PASS: ${{ secrets.DB_PASS }}
+        EMAIL_BACKEND: ${{ secrets.EMAIL_BACKEND }}
+        EMAIL_PORT: ${{ secrets.EMAIL_PORT }}
+        EMAIL_USE_TLS: ${{ secrets.EMAIL_USE_TLS }}
+        DEFAULT_FROM_EMAIL: ${{ secrets.DEFAULT_FROM_EMAIL }}
+        EMAIL_HOST_USER: ${{ secrets.EMAIL_HOST }}
+        EMAIL_HOST_PASSWORD: ${{ secrets.EMAIL_HOST_PASSWORD }}
+        EMAIL_HOST: ${{ secrets.EMAIL_HOST }}
       run: |
         cd src
         python manage.py test
