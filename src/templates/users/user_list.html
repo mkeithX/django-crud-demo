@@ -22,13 +22,13 @@
       </h6>
       {% for profile in object_list %}
       <div class="d-flex text-body-secondary pt-3">
-        <img src="{{user.user_profile.avatar.url}}" alt="{{profile.user.username}}" class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="40"
+        <img src="{{profile.avatar.url}}" alt="{{profile.user.username}}" class="bd-placeholder-img rounded-circle flex-shrink-0 me-2 rounded" width="40"
           height="40">
         <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
           <div class="d-flex justify-content-between">
             <strong class="text">{{profile.user.first_name}} {{profile.user.last_name}}</strong>
             <a href="{{profile.get_absolute_url}}" class="text-decoration-none">
-              View
+              View Profile
             </a>
           </div>
           <span class="d-block">@{{profile.user.username}}</span>

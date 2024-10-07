@@ -27,10 +27,10 @@
     <link rel="stylesheet" href="{% static 'flags/sprite-hq.css' %}">
 
     <link rel="icon" href="{% static 'favicon.ico' %}">
-    
+
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
 
-    <title>crud demo | {% block title %}{% endblock title %} </title>
+    <title>crud demo • {% block title %}{% endblock title %} </title>
     {% endblock %}
 </head>
 
@@ -46,7 +46,7 @@
             {% block content %}{% endblock content %}
         </div>
     </main>
-
+    {% include 'layouts/footer.html' %}
     {% include 'layouts/scripts.html' %}
     {% block javascripts %}{% endblock javascripts %}
 </body>

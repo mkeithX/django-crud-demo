@@ -1,4 +1,4 @@
-{% extends 'layouts/base.html' %}
+{% extends 'layouts/base-full.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% load django_bootstrap5 %}
@@ -17,17 +17,17 @@
           {% csrf_token %}
           {% bootstrap_form form show_label=False %}
 
-          <button class="w-100 btn btn-md btn-success rounded-pill" type="submit">Signup</button>
-          <div class="my-2"></div>
-          <small class="text-body-secondary">By clicking Sign up, you agree to the terms of use.</small>
-          <hr class="my-4">
-          <small class="text-body-secondary">
-            Aleady registered? <a href="{% url 'login' %}" class="text-decoration-none">Login</a> instead.
-          </small>
+        </div>
+        <button class="w-100 btn btn-md btn-success rounded-pill" type="submit">Signup</button>
+        <div class="my-2"></div>
+        <small class="text-body-secondary">By clicking Sign up, you agree to the terms of use.</small>
+        <hr class="my-4">
+        <small class="text-body-secondary">
+          Already registered? <a href="{% url 'login' %}" class="text-decoration-none">Login</a> instead.
+        </small>
       </form>
     </div>
   </div>
 </div>
 
 {% endblock content %}
-

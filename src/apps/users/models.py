@@ -12,7 +12,7 @@ import uuid
 from django.urls import reverse
 
 def user_directory_path(instance, filename):
-    return "user_{0}/1".format(instance.user.id, filename)
+    return "uploads/user_{0}/1".format(instance.user.id, filename)
 
 class User(AbstractUser):
     GENDER_CHOICES = (

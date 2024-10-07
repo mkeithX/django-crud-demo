@@ -93,43 +93,6 @@ You can use the pgAdmin to setup database
 Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in your web browser to view the application.
 
 
-## Structure
-
-<pre>
-django-crud-demo/
-│ 
-├───.github
-│   └───workflows
-├───requirements
-├───screenshots
-├───src
-│   ├───apps
-│   │   └───users
-│   │       ├───management
-│   │       │   ├───commands
-│   │       │   └───lists
-│   │       ├───migrations
-│   │       ├───templatetags
-│   │       └───...
-│   ├───core
-│   │   ├───settings
-│   │   │   ├───base.py
-│   │   │   ├───development.py
-│   │   │   └───production.py
-│   │   └───...
-│   ├───media
-│   ├───staticfiles
-│   └───templates
-│       ├───auth
-│       │   └───passwords
-│       ├───layouts
-│       ├───main
-│       └───users
-└───static
-    └───css  
-</pre>
-
-
 ## IMPORTANT
 
 This project uses a custom user model defined in the accounts app. It’s important to configure the custom user model before running the initial migration. Ensure that the `AUTH_USER_MODEL` setting in `settings.py` is properly set:
@@ -137,24 +100,11 @@ This project uses a custom user model defined in the accounts app. It’s import
 ```python
 AUTH_USER_MODEL = 'apps_users.User'
 ```
-## Tips
+## What's Next ?
 
-Create 5 dummy users
+This project includes custom commands that enhance its functionality and simplify tasks. Read the [docs](https://mkeithx.pages.dev/docs/repo/django-crud-demo) to learn more.
 
-```bash
-py manage.py create_users 5
-```
-Generate new SECRET_KEY
 
-```bash
-py manage.py new_secret
-```
-
-Run checks what changes would be made to the database for the apps_users app without applying them.
-
-```bash
-py manage.py makemigrations apps_users --dry-run --verbosity 3
-```
 
 ## License
 

@@ -10,8 +10,8 @@
   <div class="row gx-0">
     <div class="col-lg-3">
       <div class="d-flex align-items-center mt-3 mb-3">
-        <img src="{{user.user_profile.avatar.url}}" class="bd-placeholder-img rounded-circle"
-          alt="{{profile.user.username}}" width="200" height="200">
+        <img src="{{user_profile.avatar.url}}" class="bd-placeholder-img rounded-circle flex-shrink-0 border border-info-subtle"
+          alt="{{profile.user.username}}" width="230" height="230">
       </div>
     </div>
     <div class="col-lg-8">
@@ -75,7 +75,7 @@
               Country <i class="fa-solid fa-earth-asia"></i> : {{user_profile.country}} <i
                 class="{{ user_profile.country.flag_css }}"></i><br>
               Gender <i class="fa-solid fa-venus-mars"></i> : {{user_profile.user.gender|safe|capfirst}}<br>
-              Member Since:               {% if user_profile.user.is_superuser %}
+              Member Since: {% if user_profile.user.is_superuser %}
               DAY ONE.
               {% else %}
               {{user.date_joined|naturalday|capfirst}}.
