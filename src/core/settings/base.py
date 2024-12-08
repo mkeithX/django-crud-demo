@@ -2,6 +2,7 @@ from pathlib import Path
 import os
 import environ
 from django.contrib.messages import constants as messages
+from dotenv import load_dotenv
 
 from email.utils import getaddresses
 
@@ -9,7 +10,7 @@ env = environ.Env(
     DEBUG=(bool, False),
     DB_ENGINE=(str, "django.db.backends.postgresql"),
     ADMIN_URL=(str, "admin/"),
-    STATICFILES_DIRS=(str, "STATICFILES_DIRS"),
+    # STATICFILES_DIRS=(str, "STATICFILES_DIRS"),
     STATIC_BACKEND=(str, "django.contrib.staticfiles.storage.StaticFilesStorage"),
 )
 
@@ -116,7 +117,13 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(CORE_DIR, "media")
 
 STATIC_URL = "static/"
-STATICFILES_DIRS = env.list("STATICFILES_DIRS")
+# STATICFILES_DIRS = env.list("STATICFILES_DIRS")
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
+]
 
 AUTHENTICATION_BACKENDS = (
     "apps.users.backends.EmailOrUsernameModelBackend",
