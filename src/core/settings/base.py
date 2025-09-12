@@ -6,6 +6,8 @@ from dotenv import load_dotenv
 
 from email.utils import getaddresses
 
+load_dotenv()
+
 env = environ.Env(
     DEBUG=(bool, False),
     DB_ENGINE=(str, "django.db.backends.postgresql"),
@@ -15,12 +17,12 @@ env = environ.Env(
 )
 
 CORE_DIR = Path(__file__).resolve().parent.parent.parent
-BASE_DIR = environ.Path(__file__) -4
-# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# BASE_DIR = environ.Path(__file__) -4
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
+# environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
-ADMIN_URL = env("ADMIN_URL")
+ADMIN_URL = os.getenv("ADMIN_URL")
 
 INSTALLED_APPS = [
     "apps.users.apps.UsersConfig",
@@ -117,12 +119,12 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(CORE_DIR, "media")
 
 STATIC_URL = "static/"
-# STATICFILES_DIRS = env.list("STATICFILES_DIRS")
+
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static")
+    os.path.join(CORE_DIR, "static")
 ]
 
 AUTHENTICATION_BACKENDS = (

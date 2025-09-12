@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 def main():
     """Run administrative tasks."""
     if not "WEBSITE_HOSTNAME" in os.environ:
+        
         load_dotenv(".env")
     
     settings_module = "core.settings.production" if "WEBSITE_HOSTNAME" in os.environ else "core.settings.development"
